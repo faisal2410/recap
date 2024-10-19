@@ -1,10 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/order', [OrderController::class, 'createOrder']);
+// Route::get('/order/{gateway}', [OrderController::class, 'createOrder']);
+
+// Route for creating an order using Stripe
+Route::get('/order/stripe', [OrderController::class, 'createOrderWithStripe']);
+
+// Route for creating an order using PayPal
+Route::get('/order/paypal', [OrderController::class, 'createOrderWithPaypal']);
 
 Route::middleware([
     'auth:sanctum',
