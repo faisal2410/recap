@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\OrderService;
+use App\Services\DiscountService;
 use App\Services\OrderServiceForPaypal;
 use App\Services\OrderServiceForStripe;
 /*
@@ -46,11 +47,12 @@ public function createOrder()
 
 class OrderController extends Controller
 {
-    protected $stripeOrderService;
-    protected $paypalOrderService;
+    /*
+protected $stripeOrderService;
+protected $paypalOrderService;
 
-    public function __construct(OrderServiceForStripe $stripeOrderService, OrderServiceForPaypal $paypalOrderService)
-    {
+public function __construct(OrderServiceForStripe $stripeOrderService, OrderServiceForPaypal $paypalOrderService)
+{
         $this->stripeOrderService = $stripeOrderService;
         $this->paypalOrderService = $paypalOrderService;
     }
@@ -64,5 +66,29 @@ class OrderController extends Controller
     {
         return $this->paypalOrderService->placeOrder(100);
     }
+
+    */
+
+    protected $discountService;
+
+    public function __construct(DiscountService $discountService)
+    {
+        $this->discountService = $discountService;
+    }
+
+    public function calculateTotal($amount)
+    {
+        // Calculate discount
+        $discount = $this->discountService->calculateDiscount($amount);
+        $finalAmount = $amount - $discount;
+
+        // Return the view with the calculated values
+        return view('discount', [
+            'amount' => $amount,
+            'discount' => $discount,
+            'finalAmount' => $finalAmount
+        ]);
+    }
+
 }
 

@@ -16,6 +16,9 @@ Route::get('/order/stripe', [OrderController::class, 'createOrderWithStripe']);
 // Route for creating an order using PayPal
 Route::get('/order/paypal', [OrderController::class, 'createOrderWithPaypal']);
 
+
+Route::get('/calculate-discount/{amount}', [OrderController::class, 'calculateTotal']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
