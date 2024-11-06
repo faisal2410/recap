@@ -203,11 +203,13 @@ singleton(): Similar to bind, but it ensures that the same instance of the class
 
 
 $this->app->singleton(Interface::class, Implementation::class);
+
 instance(): Manually inject a specific instance of a class or an object into the service container.
 
 
 $paymentGateway = new PaypalPaymentGateway();
 $this->app->instance(PaymentGatewayInterface::class, $paymentGateway);
+
 make(): Resolve a class manually from the service container.
 
 
@@ -281,6 +283,7 @@ Here:
 
 view('order') loads the order.blade.php file from the resources/views directory.
 ['orderMessage' => $orderMessage] passes the orderMessage variable to the view, which can then be displayed using Blade syntax ({{ $orderMessage }}).
+
 3. Set Up a Route
 In the routes/web.php file, define a route that points to the createOrder() method in the OrderController:
 
@@ -293,6 +296,7 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/order', [OrderController::class, 'createOrder']);
 4. Testing the View
+
 Now, when you navigate to http://localhost:8000/order, the Service Container will resolve the dependencies, the OrderController will pass the result to the view, and you will see the following output (assuming the OrderService processes the payment successfully):
 
 

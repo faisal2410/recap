@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\MyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/myservice',[MyController::class,'someMethod']);
 
 // Route::get('/order', [OrderController::class, 'createOrder']);
 // Route::get('/order/{gateway}', [OrderController::class, 'createOrder']);

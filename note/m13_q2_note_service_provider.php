@@ -2,7 +2,7 @@
 
 //Module 13 Question:2 How do service providers function in Laravel, and why are they essential for configuring application services?
 
-https://chatgpt.com/share/6713832b-a0f0-8008-b27a-92c5f4d960c5
+// https://chatgpt.com/share/6713832b-a0f0-8008-b27a-92c5f4d960c5
 
 /*
 in Laravel 11, please answer the question with details code example
@@ -50,16 +50,14 @@ class DiscountService
 Step 2: Create a Custom Service Provider
 You can create a new service provider using the Artisan command:
 
-bash
-Copy code
+
 php artisan make:provider DiscountServiceProvider
 This command creates a new service provider in app/Providers/DiscountServiceProvider.php.
 
 Step 3: Register the Service in the Provider
 Edit the DiscountServiceProvider to bind the DiscountService into the service container.
 
-php
-Copy code
+
 // app/Providers/DiscountServiceProvider.php
 namespace App\Providers;
 
@@ -83,24 +81,25 @@ class DiscountServiceProvider extends ServiceProvider
         // You could put any bootstrapping logic here if needed
     }
 }
+
 register() method: Here, we bind the DiscountService to the service container using the singleton method, meaning that the same instance will be used every time it's resolved.
 boot() method: In this example, there is no specific logic to add to the boot() method, but it is available for any tasks that need to run once all services are registered.
+
 Step 4: Register the Service Provider in config/app.php
 To ensure Laravel uses your custom provider, add it to the list of providers in the config/app.php file.
 
-php
-Copy code
+
 // config/app.php
 
 'providers' => [
     // Other Service Providers...
     App\Providers\DiscountServiceProvider::class,
 ],
+
 Step 5: Use the Service
 Now you can inject DiscountService wherever you need it:
 
-php
-Copy code
+
 // Example Controller
 namespace App\Http\Controllers;
 
@@ -123,6 +122,7 @@ class OrderController extends Controller
         return "Final amount after discount: $finalAmount";
     }
 }
+
 In this controller, the DiscountService is injected via the constructor, and the method calculateDiscount() is used to apply a discount to the total amount.
 
 Why Service Providers Are Essential
@@ -218,6 +218,7 @@ class OrderController extends Controller
         ]);
     }
 }
+    
 What Happens Now
 When you visit the URL /calculate-discount/{amount}, for example /calculate-discount/150, Laravel will route the request to the calculateTotal method in the OrderController.
 The DiscountService will calculate the discount based on the provided amount.

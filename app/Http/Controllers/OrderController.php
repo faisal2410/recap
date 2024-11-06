@@ -7,7 +7,7 @@ use App\Services\OrderService;
 use App\Services\DiscountService;
 use App\Services\OrderServiceForPaypal;
 use App\Services\OrderServiceForStripe;
-/*
+
 class OrderController extends Controller
 {
     protected $orderService;
@@ -43,7 +43,7 @@ public function createOrder()
 
 }
 
-*/
+
 
 class OrderController extends Controller
 {

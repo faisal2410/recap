@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\MyService;
 use App\Services\PaypalPaymentGateway;
 use App\Services\StripePaymentGateway;
 use App\Services\OrderServiceForPaypal;
@@ -16,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(MyService::class, function ($app) {
+            return new MyService();
+        });
+
+
         // $this->app->bind(PaymentGatewayInterface::class, StripePaymentGateway::class);
         /*
 // Bind a default implementation of PaymentGatewayInterface
